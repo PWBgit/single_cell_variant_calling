@@ -1,4 +1,4 @@
-# single_cell_variant_calling
+# single-cell variant calling
 Variant calling for single cell DNA sequencing
 
 ## Overview
