@@ -32,5 +32,14 @@ $ samtools sort alignment.bam -o alignment.sorted.bam
 ```
 Duplicate reads were marked using [GATK Picard Tools](https://gatk.broadinstitute.org/hc/en-us) with the following command:
 ```
-gatk MarkDuplicates -M=metrics_file.txt -I=alignment.sorted.bam -O=alignment.sorted.duplicate.bam --REMOVE_DUPLICATES=false --ASSUME_SORTED=true --CREATE_INDEX=true
+$ gatk MarkDuplicates -M=metrics_file.txt -I=alignment.sorted.bam -O=alignment.sorted.duplicate.bam --REMOVE_DUPLICATES=false --ASSUME_SORTED=true --CREATE_INDEX=true
 ```
+
+### Running DeepVariant
+The [Nexflow implementation of DeepVariant](https://github.com/nf-core/deepvariant) was used for *de novo* variant calling. This requires installation of [Nextflow](https://www.nextflow.io/docs/latest/getstarted.html) and [docker](https://docs.docker.com/engine/install/ubuntu/). 
+The program is executed with the following command:
+```
+$ nextflow run nf-core/deepvariant —fasta reference.fa --bam yourBamFile --bed yourBedFile -profile standard,docker
+```
+DeepVariant requires a bedfile specifying the regions that are considered for variant calling. For this, a bedfile for the whole genome assembly of m39 was downloaded from [UCSC Genome Browser](https://genome.ucsc.edu/cgi-bin/hgTables?hgsid=958424741_QcjJfjjsZqnW8Z6yxEFtPX2i37kd&clade=mammal&org=Mouse&db=mm39&hgta_group=map&hgta_track=refGene&hgta_table=0&hgta_regionType=genome&position=chr12%3A56%2C741%2C761-56%2C761%2C390&hgta_outputType=primaryTable&hgta_outFileName=).
+
